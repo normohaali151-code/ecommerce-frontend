@@ -7,10 +7,9 @@ import {
   Link,
   useLocation,
 } from "react-router-dom";
-
 import ProductList from "./components/productlist";
 import Cart from "./components/cart";
-import ProductDetails from "./components/ProductDetails";
+
 import Checkout from "./components/checkout";
 import MyOrders from "./components/MyOrders";
 
