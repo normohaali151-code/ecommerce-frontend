@@ -58,13 +58,9 @@ function ProductDetails({ addToCart }) {
       <div className="details-card">
         <div className="details-image">
         <img 
-  src={
-    product.image?.startsWith("http") 
-      ? product.image 
-      : `https://ecommerce-project-lk0j.onrender.com/uploads/${product.image}`
-  } 
+  src={`${import.meta.env.VITE_API_URL}/uploads/${product.image}`} 
   alt={product.name} 
-/> 
+/>
         </div>
 
         <div className="details-info">
