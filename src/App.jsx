@@ -256,11 +256,11 @@ function App() {
 
         {/* PRODUCT DETAILS */}
         <Route
-          path="/products/:id"
-          element={
-            <productDetails addToCart={addToCart} />
-          }
-        />
+  path="/products/:id"
+  element={
+    <ProductDetails addToCart={addToCart} />
+  }
+/>
 
         {/* CART */}
         <Route

@@ -1,7 +1,21 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = "https://ecommerce-project-lk0j.onrender.com";
+
+function getImageUrl(image) {
+  if (!image) return "";
+
+  if (image.startsWith("http://")) {
+    return image.replace(/^http:\/\//i, "https://");
+  }
+
+  if (image.startsWith("https://")) {
+    return image;
+  }
+
+  return `${API_URL}/uploads/${image}`;
+}
 
 function ProductDetails({ addToCart }) {
   const { id } = useParams();
@@ -14,60 +28,86 @@ function ProductDetails({ addToCart }) {
     async function fetchProduct() {
       try {
         setLoading(true);
+        setError("");
 
-        const response = await fetch(`${API_URL}/products/${id}`);
-
-        if (!response.ok) {
-          throw new Error("Product lama helin");
-        }
+        const response = await fetch(
+          `${API_URL}/products/${id}`
+        );
 
         const data = await response.json();
 
-        // Waxaan u beddelnay data.product sababtoo ah backend-kaagu sidaas ayuu u soo celiyaa
-        setProduct(data.product || data);
-        setError("");
+        if (!response.ok) {
+          throw new Error(
+            data.message || "Product lama helin"
+          );
+        }
+
+        const foundProduct = data.product || data;
+
+        if (!foundProduct || !foundProduct._id) {
+          throw new Error("Product lama helin");
+        }
+
+        setProduct(foundProduct);
+
       } catch (error) {
-        console.log(error);
-        setError("Product lama soo qaadi karin");
+        console.error("Product Details Error:", error);
+        setError(error.message || "Product lama soo qaadi karin");
       } finally {
         setLoading(false);
       }
     }
 
-    fetchProduct();
+    if (id) {
+      fetchProduct();
+    }
   }, [id]);
 
   if (loading) {
-    return <p className="message">Loading product...</p>;
+    return (
+      <p className="message">
+        Loading product...
+      </p>
+    );
   }
 
   if (error) {
-    return <p className="error">{error}</p>;
+    return (
+      <main className="details-page">
+        <Link to="/" className="back-link">
+          ← Back to Products
+        </Link>
+        <p className="error">{error}</p>
+      </main>
+    );
   }
 
   if (!product) {
-    return <p className="error">Product lama helin.</p>;
+    return (
+      <p className="error">
+        Product lama helin.
+      </p>
+    );
   }
 
   return (
     <main className="details-page">
+
       <Link to="/" className="back-link">
         ← Back to Products
       </Link>
 
       <div className="details-card">
+
         <div className="details-image">
-        <img
-  src={
-    product.image?.startsWith("http")
-      ? product.image.replace("http://localhost:5000", import.meta.env.VITE_API_URL)
-      : `${import.meta.env.VITE_API_URL}/uploads/${product.image}`
-  }
-  alt={product.name}
-/>
+          <img
+            src={getImageUrl(product.image)}
+            alt={product.name}
+          />
         </div>
 
         <div className="details-info">
+
           <h1>{product.name}</h1>
 
           <p className="details-description">
@@ -94,6 +134,7 @@ function ProductDetails({ addToCart }) {
               ? "Add to Cart"
               : "Out of Stock"}
           </button>
+
         </div>
       </div>
     </main>
