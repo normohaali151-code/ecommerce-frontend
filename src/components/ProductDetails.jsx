@@ -57,9 +57,13 @@ function ProductDetails({ addToCart }) {
 
       <div className="details-card">
         <div className="details-image">
-        <img 
-  src={`${import.meta.env.VITE_API_URL}/uploads/${product.image}`} 
-  alt={product.name} 
+        <img
+  src={
+    product.image?.startsWith("http")
+      ? product.image.replace("http://localhost:5000", import.meta.env.VITE_API_URL)
+      : `${import.meta.env.VITE_API_URL}/uploads/${product.image}`
+  }
+  alt={product.name}
 />
         </div>
 

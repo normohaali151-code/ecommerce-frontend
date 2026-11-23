@@ -3,9 +3,13 @@ import { Link } from "react-router-dom";
 function ProductCard({ product, addToCart }) {
   return (
     <div className="product-card">
-     <img 
-  src={`${import.meta.env.VITE_API_URL}/uploads/${product.image}`} 
-  alt={product.name} 
+     <img
+  src={
+    product.image?.startsWith("http")
+      ? product.image.replace("http://localhost:5000", import.meta.env.VITE_API_URL)
+      : `${import.meta.env.VITE_API_URL}/uploads/${product.image}`
+  }
+  alt={product.name}
 />
 
       <h2>{product.name}</h2>
