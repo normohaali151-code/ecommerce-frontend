@@ -7,10 +7,11 @@ import {
   Link,
   useLocation,
 } from "react-router-dom";
-import ProductList from "./components/productlist";
+
 import Cart from "./components/cart";
-import ProductDetails from "./components/ProductDetails";
+import productlist from"./components/productlist";
 import Checkout from "./components/checkout";
+import ProductDetails from "./components/ProductDetails";
 import MyOrders from "./components/MyOrders";
 
 import AdminDashboard from "./components/AdminDashboard";
@@ -259,7 +260,7 @@ function App() {
         <Route
           path="/products/:id"
           element={
-            <ProductDetails addToCart={addToCart} />
+            <productDetails addToCart={addToCart} />
           }
         />
 

@@ -1,6 +1,6 @@
 import ProductCard from "./productCard";
 
-function ProductList({ products, addToCart }) {
+function productlist({ products, addToCart }) {
   if (products.length === 0) {
     return <p>No products found.</p>;
   }
@@ -18,4 +18,4 @@ function ProductList({ products, addToCart }) {
   );
 }
 
-export default ProductList;
+export default productlist  ;
