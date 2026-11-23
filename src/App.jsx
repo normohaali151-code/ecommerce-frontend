@@ -8,17 +8,15 @@ import {
   useLocation,
 } from "react-router-dom";
 
+import ProductList from "./components/productlist";
 import Cart from "./components/cart";
-import productlist from"./components/productlist";
-import Checkout from "./components/checkout";
 import ProductDetails from "./components/ProductDetails";
+import Checkout from "./components/checkout";
 import MyOrders from "./components/MyOrders";
-
 import AdminDashboard from "./components/AdminDashboard";
 import AdminOrders from "./components/AdminOrders";
 import AdminUsers from "./components/AdminUsers";
 import AdminProducts from "./components/AdminProducts";
-
 import Login from "./Login";
 import Register from "./Register";
 
