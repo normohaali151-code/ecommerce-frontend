@@ -19,7 +19,7 @@ import AdminUsers from "./components/AdminUsers";
 import AdminProducts from "./components/AdminProducts";
 import Login from "./Login";
 import Register from "./Register";
-
+import AdminRoute from "./components/AdminRoute";
 import "./App.css";
 
 function App() {
@@ -288,28 +288,44 @@ function App() {
         />
 
         {/* ADMIN DASHBOARD */}
-        <Route
-          path="/admin"
-          element={<AdminDashboard />}
-        />
+<Route
+  path="/admin"
+  element={
+    <AdminRoute user={user}>
+      <AdminDashboard />
+    </AdminRoute>
+  }
+/>
 
-        {/* ADMIN ORDERS */}
-        <Route
-          path="/admin/orders"
-          element={<AdminOrders />}
-        />
+{/* ADMIN ORDERS */}
+<Route
+  path="/admin/orders"
+  element={
+    <AdminRoute user={user}>
+      <AdminOrders />
+    </AdminRoute>
+  }
+/>
 
-        {/* ADMIN PRODUCTS */}
-        <Route
-          path="/admin/products"
-          element={<AdminProducts />}
-        />
+{/* ADMIN PRODUCTS */}
+<Route
+  path="/admin/products"
+  element={
+    <AdminRoute user={user}>
+      <AdminProducts />
+    </AdminRoute>
+  }
+/>
 
-        {/* ADMIN USERS */}
-        <Route
-          path="/admin/users"
-          element={<AdminUsers />}
-        />
+{/* ADMIN USERS */}
+<Route
+  path="/admin/users"
+  element={
+    <AdminRoute user={user}>
+      <AdminUsers />
+    </AdminRoute>
+  }
+/>
 
         {/* LOGIN */}
         <Route
